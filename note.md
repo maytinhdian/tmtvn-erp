@@ -4,6 +4,15 @@
 
 - composer require nwidart/laravel-modules
 - php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider"
+- composer.json
+    {
+        "autoload": {
+            "psr-4": {
+            "App\\": "app/",
+            "Modules\\": "Modules/"
+            }
+        }
+    }
 - composer dump-autoload
 - Link tài liệu tham khảo
         <https://nwidart.com/laravel-modules/v6/basic-usage/creating-a-module>
