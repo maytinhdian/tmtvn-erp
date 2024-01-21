@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
+use Modules\Customer\app\Http\Controllers\CustomerController;
 
 /*
     |--------------------------------------------------------------------------
@@ -14,6 +15,18 @@ use Illuminate\Support\Facades\Route;
     |
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->name('api.')->group(function () {
-    Route::get('customer', fn (Request $request) => $request->user())->name('customer');
+//Public route
+Route::prefix('customer')->group(function () {
+    Route::get('/', [CustomerController::class, 'index']);
 });
+
+//Protected route
+Route::middleware(['auth:sanctum'])->prefix('customer')->group(function () {
+
+    //Customer CRUD route
+    Route::post('create', [CustomerController::class, 'store']);
+    Route::put('update/{id}', [CustomerController::class, 'update']);
+    Route::delete('delete/{id}', [CustomerController::class, 'destroy']);
+
+});
+

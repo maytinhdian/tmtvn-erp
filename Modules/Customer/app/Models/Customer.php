@@ -2,9 +2,10 @@
 
 namespace Modules\Customer\app\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Customer\Database\factories\CustomerFactory;
 
 class Customer extends Model
 {
@@ -14,6 +15,14 @@ class Customer extends Model
      * The attributes that are mass assignable.
      */
     protected $guarded = [];
+
+    protected function name(): Attribute
+    {
+        return new Attribute(
+            fn($value) => Str::upper($value), // accessor
+            fn($value) => Str::upper($value), // mutator
+        );
+    }
 
     protected static function booted()
     {
