@@ -2,66 +2,75 @@
 
 namespace Modules\Customer\app\Http\Controllers;
 
+use DateTime;
+use Illuminate\Support\Str;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Modules\Customer\app\Models\Customer;
+use Modules\Customer\app\Http\Requests\CustomerRequest;
 
 class CustomerController extends Controller
 {
+    public  $data = [];
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        return view('customer::index');
-    }
+        $this->data = Customer::all();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('customer::create');
+        return response()->json($this->data);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(CustomerRequest $request)
     {
-        //
+        $input = $request->all();
+        
+        $input['updated_at']=Date('Y-m-d H:i:s');
+        $input['created_at']=Date('Y-m-d H:i:s');
+        $this->data = Customer::create($input);
+        Log::info($this->data);
+        return response()->json($this->data);
     }
 
     /**
      * Show the specified resource.
      */
-    public function show($id)
+    public function show($id): JsonResponse
     {
-        return view('customer::show');
-    }
+        $this->data = Customer::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        return view('customer::edit');
+        return response()->json($this->data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(CustomerRequest $request, $id): JsonResponse
     {
         //
+        $product = Customer::find($id);
+        $this->data = $product->update($request->all());
+        return response()->json($this->data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         //
+        $this->data = Customer::destroy($id);
+        return response()->json($this->data);
+    }
+    public function search($name)
+    {
+        //
+        return Customer::where('name', 'like', '%' . $name . '%')->get();
     }
 }
