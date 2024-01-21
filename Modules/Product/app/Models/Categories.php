@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Product\Database\factories\CategoryFactory;
 
-class Category extends Model
+class Categories extends Model
 {
     use HasFactory;
 

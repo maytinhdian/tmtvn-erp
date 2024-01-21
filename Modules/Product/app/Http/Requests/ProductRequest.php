@@ -1,25 +1,29 @@
 <?php
 
-namespace Modules\Product\app\Models;
+namespace Modules\Product\app\Http\Requests;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Product\Database\factories\CategoryFactory;
+use Illuminate\Foundation\Http\FormRequest;
 
-class Category extends Model
+class ProductRequest extends FormRequest
 {
-    use HasFactory;
+    /**
+     * Get the validation rules that apply to the request.
+     */
+    public function rules(): array
+    {
+        return [
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'categories_id' => 'required',
+        ];
+    }
 
     /**
-     * The attributes that are mass assignable.
+     * Determine if the user is authorized to make this request.
      */
-    protected $fillable = [];
-
-    protected static function booted()
+    public function authorize(): bool
     {
-        static::creating(function ($model) {
-            $model->created_id = auth()->user()->id;
-        });
+        return true;
     }
 }
-
