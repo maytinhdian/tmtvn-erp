@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('asset_attributes', function (Blueprint $table) {
             $table->id();
-            
+            $table->string('attribute',255);
+            $table->foreignId('created_id')->constrained('users');
             $table->timestamps();
         });
     }

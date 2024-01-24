@@ -2,10 +2,11 @@
 
 namespace Modules\Customer\app\Models;
 
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Customer extends Model
 {
@@ -24,6 +25,10 @@ class Customer extends Model
         );
     }
 
+    public function asset(): HasMany
+    {
+        return $this->hasMany('assets', 'id', 'asset_id');
+    }
     protected static function booted()
     {
         static::creating(function ($model) {

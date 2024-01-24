@@ -2,6 +2,7 @@
 
 
 use Illuminate\Support\Facades\Route;
+use Modules\Asset\app\Http\Controllers\AssetController;
 use Modules\Customer\app\Http\Controllers\CustomerController;
 
 /*
@@ -19,6 +20,9 @@ use Modules\Customer\app\Http\Controllers\CustomerController;
 Route::prefix('customer')->group(function () {
     Route::get('/', [CustomerController::class, 'index']);
 });
+Route::prefix('asset')->group(function () {
+    Route::get('/', [AssetController::class, 'index']);
+});
 
 //Protected route
 Route::middleware(['auth:sanctum'])->prefix('customer')->group(function () {
@@ -27,6 +31,16 @@ Route::middleware(['auth:sanctum'])->prefix('customer')->group(function () {
     Route::post('create', [CustomerController::class, 'store']);
     Route::put('update/{id}', [CustomerController::class, 'update']);
     Route::delete('delete/{id}', [CustomerController::class, 'destroy']);
+
+});
+
+//Protected route
+Route::middleware(['auth:sanctum'])->prefix('asset')->group(function () {
+
+    //Customer CRUD route
+    Route::post('create', [AssetController::class, 'store']);
+    Route::put('update/{id}', [AssetController::class, 'update']);
+    Route::delete('delete/{id}', [AssetController::class, 'destroy']);
 
 });
 

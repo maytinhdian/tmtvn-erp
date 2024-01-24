@@ -14,9 +14,6 @@ class AssetAttribute extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [];
-    
-    protected static function newFactory(): AssetAttributeFactory
-    {
-        //return AssetAttributeFactory::new();
-    }
+
+   
 }

@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
-            
+            $table->string('name',255);
+            $table->foreignId('customer_id')->constrained('customers');
+            $table->foreignId('created_id')->constrained('users');
             $table->timestamps();
         });
     }
