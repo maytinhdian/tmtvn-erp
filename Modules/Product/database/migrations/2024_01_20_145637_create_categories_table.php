@@ -18,6 +18,7 @@ return new class extends Migration
             // $table->foreignId('parent_id')->constrained('categories','id');
             $table->unsignedBigInteger('parent_id')->default(1);
             $table->foreignId('created_id')->constrained('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

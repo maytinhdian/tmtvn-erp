@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('cellphone')->unique();
             $table->text('address');
             $table->unsignedBigInteger('created_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

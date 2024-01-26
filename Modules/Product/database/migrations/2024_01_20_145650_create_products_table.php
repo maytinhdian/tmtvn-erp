@@ -19,6 +19,7 @@ return new class extends Migration
             $table->float('price')->nullable();
             $table->foreignId('categories_id')->constrained('categories');
             $table->foreignId('created_id')->constrained('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
