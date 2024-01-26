@@ -14,7 +14,7 @@ class Attribute extends Model
     protected $fillable = [];
 
     public function values() : BelongsToMany{
-        return $this->belongsToMany(Value::class);
+        return $this->belongsToMany(Value::class)->withTimestamps();
     }
 
     protected static function booted()

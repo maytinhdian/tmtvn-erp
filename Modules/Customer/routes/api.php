@@ -37,10 +37,19 @@ Route::middleware(['auth:sanctum'])->prefix('customer')->group(function () {
 //Protected route
 Route::middleware(['auth:sanctum'])->prefix('asset')->group(function () {
 
-    //Customer CRUD route
+    //Assets CRUD route
     Route::post('create', [AssetController::class, 'store']);
     Route::put('update/{id}', [AssetController::class, 'update']);
     Route::delete('delete/{id}', [AssetController::class, 'destroy']);
 
+    //Attributes of Asset CRUD
+    Route::post('create-attribute', [AssetController::class, 'storeAttribute']);
+    Route::put('update/{id}', [AssetController::class, 'updateAttribute']);
+    Route::delete('delete/{id}', [AssetController::class, 'destroyAttribute']);
+
+    //Value of Asset CRUD
+    Route::post('create-value', [AssetController::class, 'storeValue']);
+    Route::put('update-value/{id}', [AssetController::class, 'updateValue']);
+    Route::delete('delete-value/{id}', [AssetController::class, 'destroyValue']);
 });
 

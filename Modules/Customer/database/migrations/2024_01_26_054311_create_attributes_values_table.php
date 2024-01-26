@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('attribute_value', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('customer_id')->constrained('customers');
+            $table->foreignId('asset_id')->constrained('assets');
             $table->foreignId('attribute_id')->constrained('attributes');
             $table->foreignId('value_id')->constrained('values');
             $table->foreignId('created_id')->constrained('users');
