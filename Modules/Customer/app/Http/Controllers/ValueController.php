@@ -5,9 +5,9 @@ namespace Modules\Customer\app\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Modules\Customer\app\Models\Attribute;
+use Modules\Customer\app\Models\Value;
 
-class AttributeController extends Controller
+class ValueController extends Controller
 {
     public $data = [];
 
@@ -16,9 +16,8 @@ class AttributeController extends Controller
      */
     public function index(): JsonResponse
     {
-        //
-        $this->data = Attribute::all();
-        
+        $this->data = Value::all();
+
         return response()->json($this->data);
     }
 
@@ -28,13 +27,19 @@ class AttributeController extends Controller
     public function store(Request $request): JsonResponse
     {
         $request->validate([
-            'attribute' => 'required|max:255',
-
+            'value'=>'required|max:255',
+            'attribute_id'=>"required|integer",
+            'asset_id'=>"required|integer",
         ]);
-        $attributes = new Attribute();
-        $attributes->attribute = $request->attribute;
-        $attributes->save();
-        return response()->json($attributes);
+        $values = new Value();
+        $values->value = $request->value;
+        $values->save();
+        $values->attributes()->attach(
+            $request->attribute_id,
+            ['created_id'=>auth()->user()->id],
+            ['asset_id'=>$request->asset_id,
+        ]);//TODO
+        return response()->json($values);
     }
 
     /**

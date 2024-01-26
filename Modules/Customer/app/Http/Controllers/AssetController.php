@@ -41,39 +41,6 @@ class AssetController extends Controller
         return response()->json($this->data);
     }
 
-    public function storeAttribute(Request $request)
-    {
-
-        $request->validate([
-            'attribute'=>'required|max:255',
-
-        ]);
-        $attributes = new Attribute();
-        $attributes->attribute = $request->attribute;
-        $attributes->save();
-        return response()->json($attributes);
-
-    }
-
-    public function storeValue(Request $request)
-    {
-
-        $request->validate([
-            'value'=>'required|max:255',
-            'attribute_id'=>"required|integer",
-            'asset_id'=>"required|integer",
-        ]);
-        $values = new Value();
-        $values->value = $request->value;
-        $values->save();
-        $values->attributes()->attach(
-            $request->attribute_id,
-            ['created_id'=>auth()->user()->id],
-            ['asset_id'=>$request->asset_id,
-        ]);//TODO
-        return response()->json($values);
-
-    }
 
     /**
      * Show the specified resource.
