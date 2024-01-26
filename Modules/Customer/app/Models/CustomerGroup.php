@@ -14,9 +14,11 @@ class CustomerGroup extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [];
-    
-    protected static function newFactory(): CustomerGroupFactory
+
+    protected static function booted()
     {
-        //return CustomerGroupFactory::new();
+        static::creating(function ($model) {
+            $model->created_id = auth()->user()->id;
+        });
     }
 }

@@ -3,6 +3,7 @@
 namespace Modules\Customer\database\seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Customer\app\Models\CustomerGroup;
 
 class CustomerDatabaseSeeder extends Seeder
 {
@@ -11,6 +12,9 @@ class CustomerDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        $this->call([
+            CustomerGroupSeeder::class,
+            CustomerSeeder::class,
+        ]);
     }
 }

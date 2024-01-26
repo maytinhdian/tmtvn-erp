@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('asset_attributes', function (Blueprint $table) {
+        Schema::create('values', function (Blueprint $table) {
             $table->id();
-            $table->string('attribute',255);
+            $table->string('value',255);
             $table->foreignId('created_id')->constrained('users');
             $table->timestamps();
         });
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('asset_attributes');
+        Schema::dropIfExists('values');
     }
 };

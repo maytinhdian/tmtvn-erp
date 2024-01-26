@@ -2,7 +2,7 @@
 
 
 use Illuminate\Support\Facades\Route;
-use Modules\Asset\app\Http\Controllers\AssetController;
+use Modules\Customer\app\Http\Controllers\AssetController;
 use Modules\Customer\app\Http\Controllers\CustomerController;
 
 /*

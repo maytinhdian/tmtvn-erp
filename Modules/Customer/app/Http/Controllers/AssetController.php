@@ -1,19 +1,18 @@
 <?php
 
-namespace Modules\Asset\app\Http\Controllers;
+namespace Modules\Customer\app\Http\Controllers;
 
-use DateTime;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Modules\Customer\app\Models\Asset;
+use Modules\Customer\app\Models\Value;
 use Modules\Customer\app\Http\Requests\AssetRequest;
-
 
 class AssetController extends Controller
 {
-    public  $data = [];
+    public $data = [];
 
     /**
      * Display a listing of the resource.
@@ -28,15 +27,22 @@ class AssetController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AssetRequest $request)
+    public function store(Request $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
 
-        $input['updated_at']=Date('Y-m-d H:i:s');
-        $input['created_at']=Date('Y-m-d H:i:s');
-        $this->data = Asset::create($input);
-        Log::info($this->data);
-        return response()->json($this->data);
+        // $input['updated_at']=Date('Y-m-d H:i:s');
+        // $input['created_at']=Date('Y-m-d H:i:s');
+        // $this->data = Asset::create($input);
+        // Log::info($this->data);
+        // return response()->json($this->data);
+        $request->validate([
+            'value'=>'required'
+        ]);
+        $valueAsset = new Value();
+        $valueAsset->value = $request->value;
+        $valueAsset->save();
+        $valueAsset->attributes()->attach(1);
     }
 
     /**
