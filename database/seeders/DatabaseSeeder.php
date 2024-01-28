@@ -15,14 +15,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        DB::statement('SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";');
-        DB::table('users')->insert([
-            'name'=>'Le Thanh Nha',
-            'email'=>'tnhalk@maytinhdian.com',
-            'password'=>Hash::make('123456'),
-            'id'=>0,
-            'created_at'=>Date('Y-m-d H:i:s'),
-            'updated_at'=>Date('Y-m-d H:i:s'),
-        ]);
+        // DB::statement('SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";');
+        // DB::table('users')->insert([
+        //     'name'=>'Le Thanh Nha',
+        //     'email'=>'tnhalk@maytinhdian.com',
+        //     'password'=>Hash::make('123456'),
+        //     'id'=>0,
+        //     'created_at'=>Date('Y-m-d H:i:s'),
+        //     'updated_at'=>Date('Y-m-d H:i:s'),
+        // ]);
+        $this->call(
+            UserSeeder::class,
+        );
     }
 }
