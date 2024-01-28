@@ -30,7 +30,7 @@ Route::prefix('asset')->group(function () {
 Route::middleware(['auth:sanctum'])->prefix('customer')->group(function () {
 
     //Customer CRUD route
-    Route::post('create', [CustomerController::class, 'store']);
+    Route::post('create', [CustomerController::class, 'store'])->middleware('role:user');
     Route::put('update/{id}', [CustomerController::class, 'update']);
     Route::delete('delete/{id}', [CustomerController::class, 'destroy']);
 

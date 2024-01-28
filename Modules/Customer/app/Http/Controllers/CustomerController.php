@@ -2,17 +2,16 @@
 
 namespace Modules\Customer\app\Http\Controllers;
 
-use DateTime;
-use Illuminate\Support\Str;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use Modules\Customer\app\Models\Customer;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Modules\Customer\app\Http\Requests\CustomerRequest;
+use Modules\Customer\app\Models\Customer;
 
 class CustomerController extends Controller
 {
-    public  $data = [];
+    public $data = [];
 
     /**
      * Display a listing of the resource.
@@ -30,9 +29,9 @@ class CustomerController extends Controller
     public function store(CustomerRequest $request)
     {
         $input = $request->all();
-        
-        $input['updated_at']=Date('Y-m-d H:i:s');
-        $input['created_at']=Date('Y-m-d H:i:s');
+
+        $input['updated_at'] = Date('Y-m-d H:i:s');
+        $input['created_at'] = Date('Y-m-d H:i:s');
         $this->data = Customer::create($input);
         Log::info($this->data);
         return response()->json($this->data);
@@ -64,9 +63,15 @@ class CustomerController extends Controller
      */
     public function destroy($id): JsonResponse
     {
-        //
-        $this->data = Customer::destroy($id);
-        return response()->json($this->data);
+        //Lấy id của user đang đăng nhập
+        $userId = Auth::id();
+        $customer = Customer::find($id);
+        if ($customer && $customer->created_id == $userId) {
+            $this->data = Customer::destroy($id);
+            return response()->json($this->data);
+        } else {
+            return response()->json([['status'=>'Cannot delete customer with id: '.$customer->id],['data'=>$this->data]],307);
+        }
     }
     public function search($name)
     {
