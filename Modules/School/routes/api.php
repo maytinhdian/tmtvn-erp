@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Modules\School\app\Http\Controllers\ComputerController;
+use Modules\School\app\Models\Computer;
 
 /*
     |--------------------------------------------------------------------------
@@ -14,6 +16,13 @@ use Illuminate\Support\Facades\Route;
     |
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->name('api.')->group(function () {
-    Route::get('school', fn (Request $request) => $request->user())->name('school');
+// Route::middleware(['auth:sanctum'])->prefix('v1')->name('api.')->group(function () {
+//     Route::get('school', fn (Request $request) => $request->user())->name('school');
+// });
+
+
+//Public route
+Route::prefix('computer')->group(function () {
+    Route::get('/', [ComputerController::class, 'index']);
+    Route::post('create', [ComputerController::class, 'store']);
 });

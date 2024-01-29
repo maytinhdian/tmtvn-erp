@@ -20,8 +20,8 @@ class Customer extends Model
     protected function name(): Attribute
     {
         return new Attribute(
-            fn($value) => Str::upper($value), // accessor
-            fn($value) => Str::upper($value), // mutator
+            fn($value) => Str::upper(trim($value)), // accessor
+            fn($value) => Str::upper(trim($value)), // mutator
         );
     }
 
