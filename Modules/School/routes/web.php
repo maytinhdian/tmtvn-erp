@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Customer\app\Http\Controllers\CustomerController;
+use Modules\School\app\Http\Controllers\SchoolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +14,6 @@ use Modules\Customer\app\Http\Controllers\CustomerController;
 |
 */
 
-// Route::group([], function () {
-//     Route::resource('customer', CustomerController::class)->names('customer');
-// });
+Route::group([], function () {
+    Route::resource('school', SchoolController::class)->names('school');
+});
