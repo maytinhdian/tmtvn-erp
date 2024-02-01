@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('pc_name',255);
             $table->string('user_name',255);
             $table->macAddress('mac_address')->unique();
-            $table->unsignedBigInteger('created_id');
+            $table->unsignedBigInteger('created_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

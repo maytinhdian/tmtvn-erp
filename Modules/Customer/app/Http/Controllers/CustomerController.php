@@ -66,11 +66,12 @@ class CustomerController extends Controller
         //Lấy id của user đang đăng nhập
         $userId = Auth::id();
         $customer = Customer::find($id);
+        
         if ($customer && $customer->created_id == $userId) {
             $this->data = Customer::destroy($id);
-            return response()->json($this->data);
+            return response()->json([['status'=>'Successfull delete'],['data'=>$this->data]],201);
         } else {
-            return response()->json([['status'=>'Cannot delete customer with id: '.$customer->id],['data'=>$this->data]],307);
+            return response()->json([['status'=>'Cannot delete customer with id: '.$customer->id],['data'=>$this->data]],201);
         }
     }
     public function search($name)

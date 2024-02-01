@@ -1,0 +1,5 @@
+[23492] Log opened at 2024-01-28 23:52:29.947140
+[23492] [Step Debug] INFO: Connecting to configured address/port: 127.0.0.1:9001.
+[23492] [Step Debug] ERR: Time-out connecting to debugging client, waited: 200 ms. Tried: 127.0.0.1:9001 (through xdebug.client_host/xdebug.client_port).
+[23492] Log closed at 2024-01-28 23:52:30.176918
+

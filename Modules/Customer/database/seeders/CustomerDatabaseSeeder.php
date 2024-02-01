@@ -15,6 +15,7 @@ class CustomerDatabaseSeeder extends Seeder
         $this->call([
             CustomerGroupSeeder::class,
             CustomerSeeder::class,
+            AttributeSeeder::class,
         ]);
     }
 }

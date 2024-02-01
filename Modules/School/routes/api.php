@@ -22,7 +22,24 @@ use Modules\School\app\Models\Computer;
 
 
 //Public route
-Route::prefix('computer')->group(function () {
-    Route::get('/', [ComputerController::class, 'index']);
+// Route::prefix('computer')->group(function () {
+//     Route::get('/', [ComputerController::class, 'index']);
+//     Route::post('create', [ComputerController::class, 'store']);
+//     Route::get('search/{macAddress}', 'ComputerController@search');
+
+// });
+
+Route::controller(ComputerController::class)->prefix('computer')->group(function() {
+    Route::get('/','index');
+    Route::post('search','search');
+    Route::get('show/{id}','show');
+    // Route::post('create', 'store');
+});
+
+//Protected route
+Route::middleware(['auth:sanctum'])->prefix('computer')->group(function () {
+
+    //Computer Asset CRUD route
     Route::post('create', [ComputerController::class, 'store']);
+
 });

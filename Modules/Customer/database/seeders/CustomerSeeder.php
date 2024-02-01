@@ -14,13 +14,22 @@ class CustomerSeeder extends Seeder
     {
         DB::table('customers')->insert([
 
-            'name' => 'Minh Triet',
+            'name' => 'Yang Cheng',
             'group_id' => 1,
+            'email'=>'yangcheng@maytinhdian.com',
+            'created_id'=>0,
+            'cellphone'=>'0399222222',
+            'address'=>"KCN Đồng An , Thuận An , Bình Dương"
+        ]);
+
+        DB::table('customers')->insert([
+
+            'name' => 'Minh Triet',
+            'group_id' => 2,
             'email'=>'tnhalk@maytinhdian.com',
             'created_id'=>0,
             'cellphone'=>'0399222299',
             'address'=>"133/9 duong Do Tan Phong"
         ]);
-
     }
 }

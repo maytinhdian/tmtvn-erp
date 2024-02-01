@@ -2,6 +2,7 @@
 
 namespace Modules\School\app\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
@@ -29,7 +30,7 @@ class ComputerController extends Controller
     public function store(ComputerRequest $request): JsonResponse
     {
         $input = $request->all();
-        
+
         $input['updated_at'] = Date('Y-m-d H:i:s');
         $input['created_at'] = Date('Y-m-d H:i:s');
         $this->data = Computer::create($input);
@@ -43,7 +44,11 @@ class ComputerController extends Controller
     public function show($id): JsonResponse
     {
         //
-
+        $this->data = Computer::select("*")
+            ->where([
+                ["id", "=", $id],
+            ])
+            ->get();
         return response()->json($this->data);
     }
 
@@ -65,5 +70,21 @@ class ComputerController extends Controller
         //
 
         return response()->json($this->data);
+    }
+    public function search(Request $request)
+    {
+        $request->validate([
+            'mac_address' => 'required|max:20',
+
+        ]);
+        $macAddress = Str::upper($request->mac_address);
+
+
+        $computer = Computer::select("*")
+            ->where([
+                ["mac_address", "=", $macAddress],
+            ])
+            ->get();
+        return $computer;
     }
 }
