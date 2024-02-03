@@ -27,15 +27,15 @@ class ComputerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ComputerRequest $request): JsonResponse
+    public function store(ComputerRequest $request):JsonResponse
     {
         $input = $request->all();
 
         $input['updated_at'] = Date('Y-m-d H:i:s');
         $input['created_at'] = Date('Y-m-d H:i:s');
         $this->data = Computer::create($input);
-        Log::info($this->data);
-        return response()->json($this->data);
+        Log::info(response()->json(array('success' => true, 'last_insert_id' => $this->data->id), 200));
+        return response()->json(array('success' => true, 'last_insert_id' => $this->data->id), 200);
     }
 
     /**
